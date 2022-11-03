@@ -1,0 +1,43 @@
+version: "3"
+services:
+  db:
+    container_name: exam-mysql
+    image: mysql:5.7
+    platform: linux/x86_64
+    volumes:
+      - "${MYSQL_HOME_DIR}:/var/lib/mysql:rw"
+    ports:
+      - "${MYSQL_PORT}:3306"
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    command: ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    restart: always
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "1"
+  spring:
+    container_name: exam-spring
+    image: openjdk:17-jdk-slim
+    volumes:
+      - "./spring/${SPRING_PROJECT}:/spring"
+    working_dir: /spring
+    command: ["java", "-jar", "./build/libs/${SPRING_PROJECT}-0.0.1-SNAPSHOT.war"]
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    links:
+      - db
+    restart: always
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "3"
+networks:
+  default:
+    external:
+      name: example
