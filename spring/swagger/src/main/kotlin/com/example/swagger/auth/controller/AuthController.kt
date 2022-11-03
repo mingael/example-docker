@@ -17,7 +17,7 @@ class AuthController(
 ) {
 
     @PostMapping("login")
-    @Operation(summary = "로그인")
+    @Operation(summary = "로그인", description = "이메일과 비밀번호를 입력받아 로그인을 처리합니다.")
     fun login(dto: LoginDTO.Request): ResponseEntity<Any> {
         val data = authService.login(dto)
         return ResponseEntity.ok(data)

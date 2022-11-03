@@ -27,7 +27,7 @@ services:
     working_dir: /spring
     command: ["java", "-jar", "./build/libs/${SPRING_PROJECT}-0.0.1-SNAPSHOT.war"]
     ports:
-      - "8080:8080"
+      - "8020:8020"
     depends_on:
       - db
     links:
