@@ -24,23 +24,28 @@ allprojects {
 
 // 프로젝트 수준 build.gradle 을 제외한 모든 하위 모듈에 적용
 subprojects {
-    apply(plugin = "java")
-    apply(plugin = "kotlin")
-    apply(plugin = "kotlin-jpa")
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
-
-    java.sourceCompatibility = JavaVersion.VERSION_17
+    apply {
+        plugin("java")
+        plugin("kotlin")
+        plugin("kotlin-jpa")
+        plugin("org.springframework.boot")
+        plugin("io.spring.dependency-management")
+    }
 
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     }
 
+    configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "17"
+            jvmTarget = JavaVersion.VERSION_17.toString()
         }
     }
 
@@ -57,4 +62,7 @@ project(":dev-core") {
 
 project(":dev-api") {
     apply(plugin = "kotlin-spring")
+    dependencies {
+        implementation(project(":dev-core"))
+    }
 }

@@ -1,5 +1,3 @@
-import org.springframework.boot.gradle.tasks.bundling.BootJar
-
 description = "Domain Module"
 
 allOpen {
@@ -25,7 +23,7 @@ dependencies {
     implementation("mysql:mysql-connector-java")
 }
 
-tasks.getByName<BootJar>("bootJar") {
+tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
     enabled = false
 }
 
