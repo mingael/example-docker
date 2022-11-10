@@ -1,4 +1,6 @@
 .env
 mysql/
+spring-folder/*/build
+spring-folder/*/.gradle
 spring/*/build/
 spring/*/.gradle
