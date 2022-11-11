@@ -14,7 +14,7 @@ class AccountService(
 ) {
 
     @Transactional
-    @Lock(value = LockModeType.PESSIMISTIC_FORCE_INCREMENT)
+    @Lock(value = LockModeType.PESSIMISTIC_WRITE)
     fun register(dto: AccountRequest): Account? {
         if (accountRepository.findByEmail(dto.email) != null) return null
         return accountRepository.save(
@@ -25,6 +25,10 @@ class AccountService(
                 password = dto.password
             )
         )
+    }
+
+    fun getUsers(): List<Account> {
+        return accountRepository.findAll()
     }
 
 }

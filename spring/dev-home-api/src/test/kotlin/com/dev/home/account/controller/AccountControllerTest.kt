@@ -8,18 +8,19 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 
 @SpringBootTest
 @AutoConfigureMockMvc
-internal class AuthControllerTest @Autowired constructor(
+internal class AccountControllerTest @Autowired constructor(
     private val mvc: MockMvc
 ) {
 
     @Test
-    @DisplayName("create account multi thread test")
-    fun creatAccount() {
+    @DisplayName("Test - PESSIMISTIC_FORCE_INCREMENT")
+    fun creatAccountMultiThreadTest() {
         val param = mapOf(
             "name" to "a",
             "nickname" to "b",
@@ -34,6 +35,9 @@ internal class AuthControllerTest @Autowired constructor(
             )
                 .andDo(MockMvcResultHandlers.print())
         }
+
+        mvc.perform(get("/api/account"))
+            .andDo(MockMvcResultHandlers.print())
     }
 
 }
