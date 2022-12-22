@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 @EnableJpaAuditing
 @SpringBootApplication
-@EntityScan(basePackages = ["com.dev.core"])
-@EnableJpaRepositories(basePackages = ["com.dev.core"])
+@EntityScan(basePackages = ["com.dev"])
+@EnableJpaRepositories(basePackages = ["com.dev"])
 class DevHomeApplication
 
 fun main(args: Array<String>) {
