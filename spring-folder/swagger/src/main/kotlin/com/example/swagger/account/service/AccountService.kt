@@ -12,7 +12,7 @@ class AccountService {
     }
 
     fun getUser(id: Long): AccountDTO.Response {
-        return AccountDTO.Response(id, "", 20)
+        return AccountDTO.Response(id, "", 20, "", "")
     }
 
     fun createUser(dto: AccountDTO.Response) {
