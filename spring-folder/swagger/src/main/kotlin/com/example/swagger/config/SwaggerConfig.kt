@@ -43,7 +43,7 @@ class SwaggerConfig {
         GroupedOpenApi.builder()
             .group("Account API")
             .packagesToScan("com.example.swagger.account")
-            .addOpenApiCustomiser(loginRequiredApiCustomizer())
+//            .addOpenApiCustomiser(loginRequiredApiCustomizer())
             .build()
 
     private fun loginRequiredApiCustomizer() = OpenApiCustomiser { openApi ->
