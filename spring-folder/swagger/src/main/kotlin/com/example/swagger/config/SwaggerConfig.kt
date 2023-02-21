@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Contact
 import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.info.License
-import io.swagger.v3.oas.models.Components
 import io.swagger.v3.oas.models.security.SecurityRequirement
 import io.swagger.v3.oas.models.security.SecurityScheme
 import org.springdoc.core.GroupedOpenApi
@@ -43,14 +42,14 @@ class SwaggerConfig {
         GroupedOpenApi.builder()
             .group("Account API")
             .packagesToScan("com.example.swagger.account")
-//            .addOpenApiCustomiser(loginRequiredApiCustomizer())
+            .addOpenApiCustomiser(loginRequiredApiCustomizer())
             .build()
 
     private fun loginRequiredApiCustomizer() = OpenApiCustomiser { openApi ->
         openApi
             .addSecurityItem(SecurityRequirement().addList("Authorization"))
             .components(
-                Components().addSecuritySchemes(
+                openApi.components.addSecuritySchemes(
                     "Authorization",
                     SecurityScheme()
                         .`in`(SecurityScheme.In.HEADER)
