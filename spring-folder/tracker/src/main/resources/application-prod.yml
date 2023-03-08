@@ -1,0 +1,6 @@
+log:
+  config:
+    path: ./logs
+    filename: prod
+    max-history: 7
+    total-size-cap: 1GB
