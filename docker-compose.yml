@@ -37,6 +37,24 @@ services:
       options:
         max-size: "1m"
         max-file: "3"
+  aws:
+    container_name: exam-aws
+    image: localstack/localstack
+    platform: linux/amd64
+    ports:
+      - "4566:4566"            # LocalStack Gateway
+      - "4510-4559:4510-4559"  # external services port range
+    environment:
+      - SERVICE=dynamodb       # 사용할 서비스
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      # 내부에서 aws 커맨드 사용하기 위해 설정. awslocal 사용 시 미지정
+      - AWS_ACCESS_KEY_ID=dev     
+      - AWS_SECRET_ACCESS_KEY=dev
+      - AWS_DEFAULT_REGION=ap-northeast-2
+    volumes:
+      - "./localstack:/var/lib/localstack"
+    restart: unless-stopped
 networks:
   default:
     external:
