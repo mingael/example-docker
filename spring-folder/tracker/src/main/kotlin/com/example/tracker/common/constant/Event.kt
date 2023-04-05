@@ -1,4 +1,4 @@
-package com.example.tracker.constant
+package com.example.tracker.common.constant
 
 enum class Event(val value: String) {
     FIRST_VISIT("첫 방문"),

@@ -1,3 +1,7 @@
+cloud:
+  aws:
+    dynamodb:
+      endpoint: http://localhost:4566
 log:
   config:
     path: ./logs
