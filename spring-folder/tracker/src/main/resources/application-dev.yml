@@ -1,5 +1,7 @@
 cloud:
   aws:
+    access-key-id: foo
+    secret-access-key: bar
     dynamodb:
       endpoint: http://localhost:4566
 log:

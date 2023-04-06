@@ -24,9 +24,23 @@ dependencies {
 
     implementation("com.google.code.gson:gson")
 
-    // AdEvent, ClickEvent
+    // GET Library - AdEvent, ClickEvent
     implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.429")
     implementation("io.github.boostchicken:spring-data-dynamodb:5.2.5")
+
+    // AWS SDK Kotlin - ScrollEvent
+    implementation("aws.sdk.kotlin:dynamodb-jvm:0.21.4-beta")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
+
+    // AWS SDK JAVA - ButtonEvent
+    implementation("software.amazon.awssdk:dynamodb-enhanced")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
+}
+// AWS SDK JAVA - ButtonEvent
+dependencyManagement {
+    imports {
+        mavenBom("software.amazon.awssdk:bom:2.20.26")
+    }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
