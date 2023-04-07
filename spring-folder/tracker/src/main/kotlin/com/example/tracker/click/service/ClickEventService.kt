@@ -4,7 +4,9 @@ import com.example.tracker.click.domain.ClickEvent
 import com.example.tracker.click.domain.SdkClickEvent
 import com.example.tracker.click.repository.ClickEventRepository
 import com.example.tracker.click.repository.SdkClickEventRepository
+import com.example.tracker.click.vo.JsonData
 import com.example.tracker.common.domain.PrimaryKey
+import com.google.gson.Gson
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -16,7 +18,14 @@ class ClickEventService(
 ) {
 
     fun save() {
-        clickEventRepository.save(ClickEvent(id = 8L, regDtm = LocalDateTime.now()))
+        val jsonData = Gson().toJson(JsonData("abcd"))
+        clickEventRepository.save(
+            ClickEvent(
+                id = 8L,
+                regDtm = LocalDateTime.now(),
+                jsonData = jsonData
+            )
+        )
     }
 
     fun findAll(): List<ClickEvent> {

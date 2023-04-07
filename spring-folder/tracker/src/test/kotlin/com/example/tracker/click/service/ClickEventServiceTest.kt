@@ -1,6 +1,8 @@
 package com.example.tracker.click.service
 
+import com.example.tracker.click.vo.JsonData
 import com.example.tracker.common.domain.PrimaryKey
+import com.google.gson.Gson
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -36,7 +38,10 @@ internal class ClickEventServiceTest @Autowired constructor(
             now.minusDays(1),
             now
         )
-        result.forEach { println(it) }
+        result.forEach { e ->
+            println(e)
+            e.jsonData?.run { println(Gson().fromJson(this, JsonData::class.java)) }
+        }
     }
 
 }

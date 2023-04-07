@@ -1,9 +1,6 @@
 package com.example.tracker.click.domain
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted
+import com.amazonaws.services.dynamodbv2.datamodeling.*
 import com.example.tracker.common.converter.DynamoDbLocalDateTimeConverter
 import com.example.tracker.common.domain.PrimaryKey
 import java.time.LocalDateTime
@@ -18,7 +15,10 @@ data class ClickEvent(
 
     @get:DynamoDBRangeKey(attributeName = "reg_dtm")
     @DynamoDBTypeConverted(converter = DynamoDbLocalDateTimeConverter::class)
-    var regDtm: LocalDateTime? = null
+    var regDtm: LocalDateTime? = null,
+
+    @get:DynamoDBAttribute(attributeName = "json_data")
+    val jsonData: String? = null
 ) {
 
     // 아직 jakarta.persistence.Id 지원안함

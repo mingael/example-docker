@@ -42,10 +42,12 @@ class SdkClickEventRepository(
                 ddb.query(request).items?.forEach {
                     val id = it.getValue("id").asN()
                     val regDtm = it.getValue("reg_dtm").asS()
+                    val jsonData = it.getValue("json_data").asS()
                     list.add(
                         SdkClickEvent(
                             id = id.toLong(),
-                            regDtm = LocalDateTime.parse(regDtm, DateTimeFormatter.ISO_DATE_TIME)
+                            regDtm = LocalDateTime.parse(regDtm, DateTimeFormatter.ISO_DATE_TIME),
+                            jsonData = jsonData
                         )
                     )
                 }
