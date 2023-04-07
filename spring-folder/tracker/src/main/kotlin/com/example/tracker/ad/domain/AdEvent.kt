@@ -1,8 +1,8 @@
 package com.example.tracker.ad.domain
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*
-import com.example.tracker.common.converter.DynamoDBLocalDateConverter
-import java.time.LocalDate
+import com.example.tracker.common.converter.DynamoDbLocalDateTimeConverter
+import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -18,6 +18,6 @@ data class AdEvent(
     var sessionKey: String = "",
 
     @DynamoDBAttribute(attributeName = "reg_dtm")
-    @DynamoDBTypeConverted(converter = DynamoDBLocalDateConverter::class)
-    var regDtm: LocalDate = LocalDate.now()
+    @DynamoDBTypeConverted(converter = DynamoDbLocalDateTimeConverter::class)
+    var regDtm: LocalDateTime = LocalDateTime.now()
 )

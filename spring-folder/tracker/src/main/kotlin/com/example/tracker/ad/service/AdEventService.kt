@@ -3,7 +3,7 @@ package com.example.tracker.ad.service
 import com.example.tracker.ad.domain.AdEvent
 import com.example.tracker.ad.repository.AdEventRepository
 import org.springframework.stereotype.Service
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Service
 class AdEventService(
@@ -22,8 +22,8 @@ class AdEventService(
         return adEventRepository.findAll() as List<AdEvent>
     }
 
-    fun findAdEvent(regDtm: LocalDate): List<AdEvent> {
-        return adEventRepository.findByRegDtm(regDtm)
+    fun findAdEvent(regDtm: LocalDateTime): List<AdEvent> {
+        return adEventRepository.findByRegDtmGreaterThan(regDtm)
     }
 
 }

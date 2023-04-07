@@ -3,7 +3,7 @@ package com.example.tracker.ad.service
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 @SpringBootTest
 internal class AdEventServiceTest @Autowired constructor(
@@ -12,7 +12,7 @@ internal class AdEventServiceTest @Autowired constructor(
 
     @Test
     fun saveTest() {
-        adEventService.save("session")
+        for (i in 1..10) adEventService.save("session $i")
     }
 
     @Test
@@ -23,7 +23,7 @@ internal class AdEventServiceTest @Autowired constructor(
 
     @Test
     fun findAdEventTest() {
-        val result = adEventService.findAdEvent(LocalDate.now())
+        val result = adEventService.findAdEvent(LocalDateTime.now().minusMinutes(13))
         result.forEach { println(it) }
     }
 

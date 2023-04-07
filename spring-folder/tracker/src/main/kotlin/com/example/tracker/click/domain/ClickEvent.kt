@@ -4,9 +4,9 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted
-import com.example.tracker.common.converter.DynamoDBLocalDateConverter
+import com.example.tracker.common.converter.DynamoDbLocalDateTimeConverter
 import com.example.tracker.common.domain.PrimaryKey
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 /**
  * DynamoDB는 Schema가 없기 때문에 기본값을 NULL로 하는게 안전
@@ -17,8 +17,8 @@ data class ClickEvent(
     var id: Long? = null,
 
     @get:DynamoDBRangeKey(attributeName = "reg_dtm")
-    @DynamoDBTypeConverted(converter = DynamoDBLocalDateConverter::class)
-    var regDtm: LocalDate? = null
+    @DynamoDBTypeConverted(converter = DynamoDbLocalDateTimeConverter::class)
+    var regDtm: LocalDateTime? = null
 ) {
 
     // 아직 jakarta.persistence.Id 지원안함
