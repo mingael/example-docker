@@ -17,8 +17,8 @@ data class ClickEvent(
     @DynamoDBTypeConverted(converter = DynamoDbLocalDateTimeConverter::class)
     var regDtm: LocalDateTime? = null,
 
-    @get:DynamoDBAttribute(attributeName = "json_data")
-    val jsonData: String? = null
+    @DynamoDBAttribute(attributeName = "json_data")
+    var jsonData: String? = null
 ) {
 
     // 아직 jakarta.persistence.Id 지원안함

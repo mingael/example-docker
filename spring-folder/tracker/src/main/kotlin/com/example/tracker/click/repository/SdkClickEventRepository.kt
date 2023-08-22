@@ -28,14 +28,14 @@ class SdkClickEventRepository(
         runBlocking {
             val attr = mutableMapOf<String, AttributeValue>()
             attr[":a"] = AttributeValue.N(partitionVal.toString())
-//            attr[":t1"] = AttributeValue.S(startDtm.toString())
-//            attr[":t2"] = AttributeValue.S(endDtm.toString())
-            attr[":t"] = AttributeValue.S("2023-04-07")
+            attr[":t1"] = AttributeValue.S(startDtm.toString())
+            attr[":t2"] = AttributeValue.S(endDtm.toString())
+//            attr[":t"] = AttributeValue.S("2023-04-07")
 
             val request = QueryRequest {
                 tableName = TABLE_NAME
-//                keyConditionExpression = "id = :a AND reg_dtm BETWEEN :t1 AND :t2"
-                keyConditionExpression = "id = :a AND begins_with(reg_dtm, :t)"
+                keyConditionExpression = "id = :a AND reg_dtm BETWEEN :t1 AND :t2"
+//                keyConditionExpression = "id = :a AND begins_with(reg_dtm, :t)"
                 expressionAttributeValues = attr
             }
             clientProvider.client().use { ddb ->

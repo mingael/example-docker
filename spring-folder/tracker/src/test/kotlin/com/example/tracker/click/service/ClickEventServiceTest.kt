@@ -21,13 +21,13 @@ internal class ClickEventServiceTest @Autowired constructor(
     @Test
     fun findAllTest() {
         val result = clickEventService.findAll()
-        result.forEach { println(it) }
+        result.forEach { println("----$it") }
     }
 
     @Test
     fun findByKeyTest() {
         val result = clickEventService.findByKey(PrimaryKey(id = 1L, regDtm = LocalDateTime.now()))
-        result.forEach { println(it) }
+        result.forEach { println("-----$it") }
     }
 
     @Test
@@ -36,7 +36,7 @@ internal class ClickEventServiceTest @Autowired constructor(
         val result = clickEventService.findByRegDtmBetween(
             8L,
             now.minusDays(1),
-            now
+            now.plusDays(1)
         )
         result.forEach { e ->
             println(e)

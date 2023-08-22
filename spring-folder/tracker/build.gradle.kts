@@ -25,7 +25,7 @@ dependencies {
     implementation("com.google.code.gson:gson")
 
     // GET Library - AdEvent, ClickEvent
-    implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.429")
+    implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.533")
     implementation("io.github.boostchicken:spring-data-dynamodb:5.2.5")
 
     // AWS SDK Kotlin - ScrollEvent

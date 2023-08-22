@@ -5,7 +5,8 @@ services:
     image: mysql:5.7
     platform: linux/x86_64
     volumes:
-      - "${MYSQL_HOME_DIR}:/var/lib/mysql:rw"
+      - "${MYSQL_HOME_DIR}/data:/var/lib/mysql:rw"
+      - "${MYSQL_HOME_DIR}/init:/docker-entrypoint-initdb.d/"
     ports:
       - "${MYSQL_PORT}:3306"
     environment:
@@ -23,7 +24,7 @@ services:
     container_name: exam-spring
     image: openjdk:17-jdk-slim
     volumes:
-      - "./spring/${SPRING_PROJECT}:/spring"
+      - "./spring-folder/${SPRING_PROJECT}:/spring"
     working_dir: /spring
     command: ["java", "-jar", "./build/libs/${SPRING_PROJECT}-0.0.1-SNAPSHOT.war"]
     ports:
@@ -49,11 +50,12 @@ services:
       - DEBUG=1
       - DOCKER_HOST=unix:///var/run/docker.sock
       # 내부에서 aws 커맨드 사용하기 위해 설정. awslocal 사용 시 미지정
-      - AWS_ACCESS_KEY_ID=dev     
-      - AWS_SECRET_ACCESS_KEY=dev
+      - AWS_ACCESS_KEY_ID=foo
+      - AWS_SECRET_ACCESS_KEY=bar
       - AWS_DEFAULT_REGION=ap-northeast-2
     volumes:
-      - "./localstack:/var/lib/localstack"
+      - "./localstack/data:/var/lib/localstack"
+      - "./localstack/init/ready.d:/etc/localstack/init/ready.d"
     restart: unless-stopped
 networks:
   default:

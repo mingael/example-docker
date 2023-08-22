@@ -18,18 +18,17 @@ class ClickEventService(
 ) {
 
     fun save() {
-        val jsonData = Gson().toJson(JsonData("abcd"))
         clickEventRepository.save(
             ClickEvent(
                 id = 8L,
                 regDtm = LocalDateTime.now(),
-                jsonData = jsonData
+                jsonData = Gson().toJson(JsonData("abcd"))
             )
         )
     }
 
     fun findAll(): List<ClickEvent> {
-        return clickEventRepository.findAll() as List<ClickEvent>
+        return clickEventRepository.findAll().toList()
     }
 
     fun findByKey(key: PrimaryKey): List<ClickEvent> {
