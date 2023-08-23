@@ -17,19 +17,13 @@ class ScrollEventService(
         const val TABLE_NAME = "scroll_event"
     }
 
-    val client = DynamoDbClient {
-        region = regions
-        credentialsProvider = EnvironmentCredentialsProvider()
-        endpointUrl = Url.parse(endpoint)
-    }
-
     fun getAll() {
         runBlocking {
             val request = ScanRequest {
                 tableName = "scroll_event"
             }
 
-            client.use { ddb ->
+            getClient().use { ddb ->
                 val response = ddb.scan(request)
                 response.items?.forEach { item ->
                     item.keys.forEach { key ->
@@ -56,7 +50,7 @@ class ScrollEventService(
                 item = itemValues
             }
 
-            client.use { ddb ->
+            getClient().use { ddb ->
                 ddb.putItem(request)
                 println("put item: $TABLE_NAME / key val: $keyVal")
             }
@@ -76,7 +70,7 @@ class ScrollEventService(
                 tableName = TABLE_NAME
             }
 
-            client.use { ddb ->
+            getClient().use { ddb ->
                 val returnedItem = ddb.getItem(request)
                 val numberMap = returnedItem.item
                 numberMap?.forEach { key ->
@@ -101,7 +95,7 @@ class ScrollEventService(
                 expressionAttributeValues = attrValues
             }
 
-            client.use { ddb ->
+            getClient().use { ddb ->
                 val response = ddb.query(request)
                 println("count: ${response.count}")
                 response.items?.forEach { item ->
@@ -139,7 +133,7 @@ class ScrollEventService(
                 expressionAttributeValues = attrValues
             }
 
-            client.use { ddb ->
+            getClient().use { ddb ->
                 val response = ddb.query(request)
                 println("count: ${response.count}")
                 response.items?.forEach { item ->
@@ -150,6 +144,12 @@ class ScrollEventService(
                 }
             }
         }
+    }
+
+    private fun getClient() = DynamoDbClient {
+        region = regions
+        credentialsProvider = EnvironmentCredentialsProvider()
+        endpointUrl = Url.parse(endpoint)
     }
 
 }

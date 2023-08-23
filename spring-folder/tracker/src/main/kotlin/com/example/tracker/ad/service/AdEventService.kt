@@ -19,7 +19,7 @@ class AdEventService(
     }
 
     fun findAll(): List<AdEvent> {
-        return adEventRepository.findAll() as List<AdEvent>
+        return adEventRepository.findAll().toList()
     }
 
     fun findAdEvent(regDtm: LocalDateTime): List<AdEvent> {
