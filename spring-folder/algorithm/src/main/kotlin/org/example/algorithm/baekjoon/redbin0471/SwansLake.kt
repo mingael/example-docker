@@ -1,4 +1,4 @@
-package org.example.baekjoon.redbin0471
+package org.example.algorithm.baekjoon.redbin0471
 
 import java.util.*
 import kotlin.collections.ArrayDeque
@@ -32,7 +32,7 @@ class SwansLake {
 
     private var flag = false
 
-    fun example1() {
+    fun run() {
         init()
 
         println("========== 초기 ==========")

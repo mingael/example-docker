@@ -1,4 +1,4 @@
-package org.example.baekjoon.redbin0471
+package org.example.algorithm.baekjoon.redbin0471
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
