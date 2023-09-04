@@ -76,59 +76,89 @@ class WalkInThePark {
         return intArrayOf(robot.second, robot.first)
     }
 
+    /**
+     * 테스트 1 〉	통과 (12.59ms, 61.6MB)
+     * 테스트 2 〉	통과 (9.49ms, 60.9MB)
+     * 테스트 3 〉	통과 (10.07ms, 61.7MB)
+     * 테스트 4 〉	통과 (10.52ms, 59.9MB)
+     * 테스트 5 〉	통과 (9.65ms, 61.7MB)
+     * 테스트 6 〉	통과 (10.82ms, 61.3MB)
+     * 테스트 7 〉	통과 (14.11ms, 60.4MB)
+     * 테스트 8 〉	통과 (10.55ms, 60.7MB)
+     * 테스트 9 〉	통과 (12.02ms, 61.4MB)
+     * 테스트 10 〉	통과 (14.19ms, 61MB)
+     * 테스트 11 〉	통과 (14.31ms, 61.4MB)
+     * 테스트 12 〉	통과 (9.11ms, 61.3MB)
+     * 테스트 13 〉	통과 (14.19ms, 62.1MB)
+     * 테스트 14 〉	통과 (14.02ms, 61.8MB)
+     * 테스트 15 〉	통과 (9.50ms, 61.4MB)
+     * 테스트 16 〉	통과 (11.62ms, 61.4MB)
+     * 테스트 17 〉	통과 (10.33ms, 60.9MB)
+     * 테스트 18 〉	통과 (10.75ms, 60.6MB)
+     * 테스트 19 〉	통과 (10.01ms, 61.1MB)
+     * 테스트 20 〉	통과 (11.82ms, 61.2MB)
+     */
     private fun run1(park: Array<String>, routes: Array<String>): IntArray {
-        var answer: IntArray = intArrayOf(0, 0)
-        val order = HashMap<String, IntArray>()
-        order["N"] = intArrayOf(-1, 0)
-        order["S"] = intArrayOf(1, 0)
-        order["W"] = intArrayOf(0, -1)
-        order["E"] = intArrayOf(0, 1)
+        var answer = intArrayOf(0, 0)
+        // 이동 칸
+        val directionMove = hashMapOf(
+            "E" to intArrayOf(0, 1),
+            "W" to intArrayOf(0, -1),
+            "S" to intArrayOf(1, 0),
+            "N" to intArrayOf(-1, 0)
+        )
 
-        for (i in park.indices) {
-            for (j in park[i].indices) {
-                if (park[i][j] == 'S') answer = intArrayOf(i, j)
+        // 초기 위치
+        // forEach, forEachIndex는 반복적인 람다 호출로 퍼포먼스가 저하될 수 있기 때문에 for문 사용
+        // park.indices
+        for (y in park.indices) {
+            for (x in park[y].indices) {
+                if (park[y][x] == 'S') answer = intArrayOf(y, x)
             }
         }
-        routes.forEach {
-            val move = order[it.split(" ")[0]] //방향
-            val count = it.split(" ")[1].toInt() // 이동 횟수
-            var nr = answer[0]
-            var nc = answer[1]
 
-            for (i in 1..count) {
-                nr += move!![0]
-                nc += move[1]
-                if (nr < 0 || nc < 0 || nr >= park.size || nc >= park[0].length || park[nr][nc] == 'X') {
-                    nr = answer[0]
-                    nc = answer[1]
+        // 이동
+        routes.forEach { route ->
+            val (direction, distance) = route.split(" ")
+            val move = directionMove[direction]!!
+            val step = distance.toInt()
+
+            var y = answer[0]
+            var x = answer[1]
+            for (i in 0 until step) {
+                y += move[0]
+                x += move[1]
+
+                // park.first() 보다 park[0]가 속도가 빠르다.
+                if (y < 0 || x < 0 || x >= park[0].length || y >= park.size || park[y][x] == 'X') {
+                    y = answer[0]
+                    x = answer[1]
                     break
                 }
             }
-            answer[0] = nr
-            answer[1] = nc
+            answer = intArrayOf(y, x)
         }
-
         return answer
     }
 
     fun case1() {
         val park = arrayOf("SOO", "OOO", "OOO")
         val routes = arrayOf("E 2", "S 2", "W 1")
-        val result = run(park, routes)
+        val result = run1(park, routes)
         println("case1: (${result[0]} ${result[1]}), (2, 1)")
     }
 
     fun case2() {
         val park = arrayOf("SOO", "OXX", "OOO")
         val routes = arrayOf("E 2", "S 2", "W 1")
-        val result = run(park, routes)
+        val result = run1(park, routes)
         println("case2: (${result[0]} ${result[1]}), (0, 1)")
     }
 
     fun case3() {
         val park = arrayOf("OSO", "OOO", "OXO", "OOO")
         val routes = arrayOf("E 2", "S 3", "W 1")
-        val result = run(park, routes)
+        val result = run1(park, routes)
         println("case3: (${result[0]} ${result[1]}), (0, 0)")
     }
 }
