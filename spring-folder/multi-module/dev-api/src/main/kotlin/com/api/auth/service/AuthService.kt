@@ -22,7 +22,7 @@ class AuthService(
         val token = googleApiProvider.getToken(code)
         // 사용자 정보 조회
         val info = googleApiProvider.getUserInfo(token.accessToken)
-        // 사용자 정보 처리
+        // 로그인 처리
     }
 
 }
