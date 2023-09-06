@@ -64,6 +64,6 @@ project(":dev-core") {
 project(":dev-api") {
     apply(plugin = "kotlin-spring")
     dependencies {
-        implementation(project(":dev-core"))
+//        implementation(project(":dev-core"))
     }
 }
