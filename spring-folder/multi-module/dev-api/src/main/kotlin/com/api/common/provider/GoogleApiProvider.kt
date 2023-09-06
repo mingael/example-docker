@@ -21,7 +21,7 @@ class GoogleApiProvider(
 ) {
 
     /**
-     * 구글 로그인 화면 URL
+     * 구글 로그인 화면 URI
      */
     fun getGoogleAuthUrl(): String {
         return "https://accounts.google.com/o/oauth2/v2/auth?" +

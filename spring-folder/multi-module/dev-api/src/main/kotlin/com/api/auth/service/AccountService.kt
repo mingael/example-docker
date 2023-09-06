@@ -1,19 +1,20 @@
 package com.api.auth.service
 
-//import com.api.auth.domain.Account
-//import com.api.auth.repository.AccountRepository
+import com.api.auth.domain.Account
+import com.api.auth.repository.AccountRepository
 import org.springframework.stereotype.Service
 
 @Service
 class AccountService(
-//    private val accountRepository: AccountRepository
+    private val accountRepository: AccountRepository
 ) {
 
     fun createAccount(name: String) {
-//        accountRepository.save(
-//            Account(
-//                name = name
-//            )
-//        )
+        accountRepository.save(
+            Account(
+                name = name
+            )
+        )
     }
+
 }
