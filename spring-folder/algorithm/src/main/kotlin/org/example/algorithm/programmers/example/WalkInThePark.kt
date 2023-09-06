@@ -77,29 +77,29 @@ class WalkInThePark {
     }
 
     /**
-     * 테스트 1 〉	통과 (12.59ms, 61.6MB)
-     * 테스트 2 〉	통과 (9.49ms, 60.9MB)
-     * 테스트 3 〉	통과 (10.07ms, 61.7MB)
-     * 테스트 4 〉	통과 (10.52ms, 59.9MB)
-     * 테스트 5 〉	통과 (9.65ms, 61.7MB)
-     * 테스트 6 〉	통과 (10.82ms, 61.3MB)
-     * 테스트 7 〉	통과 (14.11ms, 60.4MB)
-     * 테스트 8 〉	통과 (10.55ms, 60.7MB)
-     * 테스트 9 〉	통과 (12.02ms, 61.4MB)
-     * 테스트 10 〉	통과 (14.19ms, 61MB)
-     * 테스트 11 〉	통과 (14.31ms, 61.4MB)
-     * 테스트 12 〉	통과 (9.11ms, 61.3MB)
-     * 테스트 13 〉	통과 (14.19ms, 62.1MB)
-     * 테스트 14 〉	통과 (14.02ms, 61.8MB)
-     * 테스트 15 〉	통과 (9.50ms, 61.4MB)
-     * 테스트 16 〉	통과 (11.62ms, 61.4MB)
-     * 테스트 17 〉	통과 (10.33ms, 60.9MB)
-     * 테스트 18 〉	통과 (10.75ms, 60.6MB)
-     * 테스트 19 〉	통과 (10.01ms, 61.1MB)
-     * 테스트 20 〉	통과 (11.82ms, 61.2MB)
+     * 테스트 1 〉	통과 (9.58ms, 62.5MB)
+     * 테스트 2 〉	통과 (9.40ms, 61.9MB)
+     * 테스트 3 〉	통과 (9.51ms, 62MB)
+     * 테스트 4 〉	통과 (8.89ms, 61.5MB)
+     * 테스트 5 〉	통과 (9.79ms, 60.7MB)
+     * 테스트 6 〉	통과 (8.78ms, 60.2MB)
+     * 테스트 7 〉	통과 (8.95ms, 61.8MB)
+     * 테스트 8 〉	통과 (8.97ms, 62.4MB)
+     * 테스트 9 〉	통과 (9.16ms, 62.1MB)
+     * 테스트 10 〉	통과 (9.93ms, 62.4MB)
+     * 테스트 11 〉	통과 (9.75ms, 63.7MB)
+     * 테스트 12 〉	통과 (9.64ms, 63.6MB)
+     * 테스트 13 〉	통과 (9.96ms, 61.1MB)
+     * 테스트 14 〉	통과 (9.12ms, 62.9MB)
+     * 테스트 15 〉	통과 (8.91ms, 62.9MB)
+     * 테스트 16 〉	통과 (8.64ms, 61.8MB)
+     * 테스트 17 〉	통과 (9.16ms, 61.1MB)
+     * 테스트 18 〉	통과 (9.55ms, 63.1MB)
+     * 테스트 19 〉	통과 (9.70ms, 62MB)
+     * 테스트 20 〉	통과 (9.87ms, 61.3MB)
      */
     private fun run1(park: Array<String>, routes: Array<String>): IntArray {
-        var answer = intArrayOf(0, 0)
+        var answer = IntArray(2)
         // 이동 칸
         val directionMove = hashMapOf(
             "E" to intArrayOf(0, 1),
@@ -110,18 +110,20 @@ class WalkInThePark {
 
         // 초기 위치
         // forEach, forEachIndex는 반복적인 람다 호출로 퍼포먼스가 저하될 수 있기 때문에 for문 사용
-        // park.indices
         for (y in park.indices) {
             for (x in park[y].indices) {
-                if (park[y][x] == 'S') answer = intArrayOf(y, x)
+                if (park[y][x] == 'S') {
+                    answer[0] = y
+                    answer[1] = x
+                }
             }
         }
 
         // 이동
         routes.forEach { route ->
-            val (direction, distance) = route.split(" ")
-            val move = directionMove[direction]!!
-            val step = distance.toInt()
+            val temp = route.split(" ")
+            val move = directionMove[temp[0]]!!
+            val step = temp[1].toInt()
 
             var y = answer[0]
             var x = answer[1]
@@ -136,7 +138,8 @@ class WalkInThePark {
                     break
                 }
             }
-            answer = intArrayOf(y, x)
+            answer[0] = y
+            answer[1] = x
         }
         return answer
     }

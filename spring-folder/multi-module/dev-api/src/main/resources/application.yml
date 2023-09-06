@@ -1,0 +1,7 @@
+google:
+  client:
+    id: "778232531127-crep6e22vmolg7ij4nmstk3khjs4n0dl.apps.googleusercontent.com"
+    secret: "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"
+  auth:
+    url: "https://oauth2.googleapis.com"
+    redirect-url: "http://localhost:8080/api/auth/login/google"
