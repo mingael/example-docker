@@ -18,7 +18,7 @@ dependencies {
     kapt("com.querydsl:querydsl-apt::jpa")
 
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
-    implementation("mysql:mysql-connector-java")
+    runtimeOnly("com.h2database:h2")
 }
 
 tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
