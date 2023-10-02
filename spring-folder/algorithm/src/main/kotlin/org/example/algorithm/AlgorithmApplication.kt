@@ -1,13 +1,12 @@
 package org.example.algorithm
 
-import org.example.algorithm.programmers.example.WalkInThePark
+import org.example.algorithm.programmers.kakao_blind_2023.DeliveryAndCollectionOfParcels
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
 class AlgorithmApplication
 
 fun main() {
-    WalkInThePark().case1()
-    WalkInThePark().case2()
-    WalkInThePark().case3()
+    DeliveryAndCollectionOfParcels().case1()
+    DeliveryAndCollectionOfParcels().case2()
 }

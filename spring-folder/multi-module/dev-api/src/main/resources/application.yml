@@ -1,7 +1,39 @@
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  config:
+    activate:
+      on-profile: stage
+google:
+  client:
+    id: "STAGE_GOOGLE_CLIENT_ID"
+    secret: "STAGE_GOOGLE_CLIENT_SECRET"
+  auth:
+#    url: "https://oauth2.googleapis.com"
+    redirect-url: "http://localhost:8080/api/auth/login/google"
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
 google:
   client:
     id: "GOOGLE_CLIENT_ID"
     secret: "GOOGLE_CLIENT_SECRET"
+  auth:
+    url: "https://oauth2.googleapis.com"
+    redirect-url: "http://localhost:8080/api/auth/login/google"
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+google:
+  client:
+    id: "PROD_GOOGLE_CLIENT_ID"
+    secret: "PROD_GOOGLE_CLIENT_SECRET"
   auth:
     url: "https://oauth2.googleapis.com"
     redirect-url: "http://localhost:8080/api/auth/login/google"
